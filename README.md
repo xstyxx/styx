@@ -1,8 +1,19 @@
-# styx
+<p align="center">
+  <img src="static/favicon.svg" width="80" />
+</p>
 
-Collaborative encrypted terminal sharing on an infinite canvas.
+<h1 align="center">styx</h1>
 
-**Live at [xstyx.io](https://xstyx.io)**
+<p align="center">
+  <strong>Encrypted collaborative terminals on an infinite canvas.</strong>
+</p>
+
+<p align="center">
+  <a href="https://xstyx.io">Website</a> &middot;
+  <a href="https://github.com/xstyxx/styx/releases">Releases</a>
+</p>
+
+---
 
 ## Install
 
@@ -10,56 +21,57 @@ Collaborative encrypted terminal sharing on an infinite canvas.
 curl -sSf https://xstyx.io/get | sh
 ```
 
-Then run `styx` to start a session. Share the link with anyone.
+Run `styx` to start a session. Share the link — anyone with the URL can join.
 
-### Quick run (no install)
+```sh
+$ styx
+
+  styx v0.4.1
+
+  > Link:  https://xstyx.io/s/abc123#secret
+  > Shell: /bin/bash
+```
+
+### One-liner (no install)
 
 ```sh
 curl -sSf https://xstyx.io/get | sh -s run
 ```
 
-### Download only
-
-```sh
-curl -sSf https://xstyx.io/get | sh -s download
-```
-
 ## Features
 
-- **End-to-end encrypted** — AES-128-CTR with Argon2id key derivation
-- **Infinite canvas** — arrange multiple terminals freely, zoom and pan
-- **Real-time collaboration** — live cursors, chat, and presence
-- **Cross-platform** — Linux, macOS, FreeBSD, Windows
-- **Lightweight** — single static binary, no dependencies
-- **Self-hosted** — run your own relay server
+- **End-to-end encrypted** — AES-128-CTR + Argon2id. Server never sees plaintext.
+- **Infinite canvas** — multiple terminals, drag to arrange, zoom and pan.
+- **Real-time** — live cursors, presence indicators, built-in chat.
+- **Cross-platform** — single static binary. No runtime dependencies.
+- **Self-hosted** — bring your own relay server.
 
-## Platforms
+## Supported Platforms
 
 | OS | Architectures |
 |---|---|
-| Linux | x86_64, aarch64, armv7 |
-| macOS | x86_64, aarch64 (Apple Silicon) |
+| Linux | x86_64, aarch64, armv7, arm |
+| macOS | x86_64, Apple Silicon |
 | FreeBSD | x86_64 |
 | Windows | x86_64, i686 |
 
-## Self-hosting
+## How It Works
 
-See [SELF_HOSTING.md](SELF_HOSTING.md) for instructions on running your own styx relay server.
+1. Client generates a random encryption key and derives an AES key via Argon2id
+2. Terminal I/O is encrypted client-side before transmission
+3. The relay server only sees ciphertext — cannot read terminal content
+4. The key is in the URL fragment (`#`), which is never sent to the server
 
 ## Development
 
-Requirements: Rust, Node.js, Redis
+Requires: Rust 1.75+, Node.js 18+, Redis
 
 ```sh
-# Frontend
-npm install
-npm run dev
+npm install          # frontend deps
+npm run dev          # start dev server (SvelteKit)
 
-# Server
-cargo run --bin styx-server
-
-# Client
-cargo run --bin styx
+cargo run -p styx-server   # relay server
+cargo run -p styx          # client binary
 ```
 
 ## License
