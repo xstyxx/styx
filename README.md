@@ -74,6 +74,6 @@ cargo run -p styx-server   # relay server
 cargo run -p styx          # client binary
 ```
 
-## License
+## Reference
 
-MIT
+https://github.com/ekzhang/sshx
