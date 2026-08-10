@@ -1,0 +1,37 @@
+node_modules/
+build/
+.svelte-kit/
+dist/
+target/
+
+# Private / deployment
+scripts/
+deploy/
+downloads/
+docs/
+install/
+systemd/
+backups/
+certs/
+acme-webroot/
+compose*.yaml
+Dockerfile*
+fly.toml
+mprocs.yaml
+Cross.toml
+.github/
+
+# Secrets
+.env
+.env.*
+*.env
+
+# OS
+.DS_Store
+*.wasm
+OPERATIONS.md
+RELEASING.md
+SECURITY.md
+SELF_HOSTING.md
+SUPPORTED_PLATFORMS.md
+.intentionally-empty-file.o
